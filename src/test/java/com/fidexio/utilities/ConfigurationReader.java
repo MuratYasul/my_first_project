@@ -1,4 +1,4 @@
-package com.cydeo.utilities;
+package com.fidexio.utilities;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -9,13 +9,12 @@ public class ConfigurationReader {
     private static Properties properties = new Properties();
 
     static {
-        //2. We need to open the file in java memory: FileInputStream
+
         try {
             FileInputStream file = new FileInputStream("configuration.properties");
+           properties.load(file);
+           file.close();
 
-            //3. Load the properties object using FileInputStream object
-
-            properties.load(file);
         } catch (IOException e) {
             System.out.println("File not found in the ConfigurationReader class.");
             e.printStackTrace();

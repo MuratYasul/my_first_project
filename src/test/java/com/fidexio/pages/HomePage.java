@@ -1,6 +1,8 @@
-package com.cydeo.pages;
+package com.fidexio.pages;
 
-import com.cydeo.utilities.Driver;
+import com.fidexio.utilities.Driver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 public class HomePage {
@@ -9,5 +11,8 @@ public class HomePage {
 
 
     }
+@FindBy(xpath = "//div/ol/li[@class='active']")
+    public WebElement inboxText;
+
 
 }
