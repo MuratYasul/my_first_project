@@ -1,0 +1,486 @@
+Index: src/test/java/com/fidexio/step_definitions/LoginPage_StepDefinitions.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fidexio.step_definitions;\r\n\r\nimport com.fidexio.pages.HomePage;\r\nimport com.fidexio.pages.LoginPage;\r\nimport com.fidexio.utilities.ConfigurationReader;\r\nimport com.fidexio.utilities.Driver;\r\nimport io.cucumber.java.en.And;\r\nimport io.cucumber.java.en.Given;\r\nimport io.cucumber.java.en.Then;\r\nimport io.cucumber.java.en.When;\r\nimport org.junit.Assert;\r\nimport org.openqa.selenium.Keys;\r\nimport org.openqa.selenium.support.ui.ExpectedConditions;\r\nimport org.openqa.selenium.support.ui.WebDriverWait;\r\n\r\nimport java.util.concurrent.TimeUnit;\r\n\r\npublic class LoginPage_StepDefinitions {\r\n\r\n    LoginPage loginPage = new LoginPage();\r\n    HomePage homePage = new HomePage();\r\n    @Given(\"user is on the login page\")\r\n    public void user_is_on_the_login_page() {\r\n        Driver.getDriver().get(ConfigurationReader.getProperty(\"environment\"));\r\n\r\n    }\r\n    @When(\"user enters valid {string}\")\r\n    public void user_enters_valid(String string) {\r\n        loginPage.userNameInput.sendKeys(string);\r\n\r\n       }\r\n    @When(\"user enters password {string}\")\r\n    public void user_enters_password(String string) {\r\n        loginPage.passwordInput.sendKeys(string);\r\n       }\r\n    @When(\"user clicks on the login button\")\r\n    public void user_clicks_on_the_login_button() {\r\n        loginPage.loginButton.click();\r\n\r\n        }\r\n    @Then(\"user should be on the homepage\")\r\n    public void user_should_be_on_the_homepage() {\r\n        Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);\r\n        WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);\r\n        wait.until(ExpectedConditions.titleIs(\"#Inbox - Odoo\"));\r\n        String expectedTitle =\"#Inbox - Odoo\";\r\n        Assert.assertEquals(expectedTitle, Driver.getDriver().getTitle());\r\n\r\n    }\r\n\r\n\r\n    @When(\"user enters invalid email {string}\")\r\n    public void userEntersInvalidEmail(String string) {\r\n       loginPage.inputEmail.sendKeys(string);\r\n        loginPage.loginButton.click();\r\n    }\r\n\r\n    @And(\"user enters invalid password {string}\")\r\n    public void userEntersInvalidPassword(String string) {\r\n     loginPage.inputPassword.sendKeys(string);\r\n     //   loginPage.loginButton.click();\r\n        loginPage.loginButton.sendKeys(Keys.ENTER);\r\n\r\n    }\r\n\r\n    @Then(\"user sees {string} message displayed for invalid credentials\")\r\n    public void userSeesMessageDisplayedForInvalidCredentials(String string) {\r\n      //  loginPage.loginBtn.click();\r\n       String actualMsg= loginPage.wrongCredentials.getText();\r\n       String expectedMessage=\"Wrong login/password\";\r\n        System.out.println(\"When entering wrong credentials, User sees = \" + \"\\\"\"+actualMsg+\"\\\"\"+ \" message.\");\r\n        Assert.assertEquals(expectedMessage,actualMsg);\r\n\r\n}\r\n\r\n\r\n    @When(\"user press ENTER key on the login button\")\r\n    public void user_press_enter_key_on_the_login_button() {\r\n       loginPage.loginButton.sendKeys(Keys.ENTER);\r\n\r\n          }\r\n    @Then(\"ENTER key is pressable\")\r\n    public void enter_key_is_pressable() {\r\n        System.out.println(\"homePage.inboxText.getText() = \" + homePage.inboxText.getText());\r\n        Assert.assertTrue(\"User cannot log in home page\",homePage.inboxText.isDisplayed());\r\n\r\n//        String required = \"required\";\r\n//        String verifiedMessage = \"Please fill in this field.\";\r\n//        boolean requiredUsername = loginPage.userNameInput.getAttribute(\"required\").equals(required);\r\n//        boolean requiredPassword = loginPage.passwordInput.getAttribute(\"required\").equals(required);\r\n//        boolean validateMsgUsername = loginPage.userNameInput.getAttribute(\"validationMessage\").equals(verifiedMessage);\r\n//        boolean validateMsgPassword = loginPage.passwordInput.getAttribute(\"validationMessage\").equals(verifiedMessage);\r\n//        Assert.assertTrue(requiredUsername && requiredPassword);\r\n//        Assert.assertTrue(validateMsgUsername && validateMsgPassword);\r\n\r\n    }\r\n}\r\n\r\n\r\n\r\n\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/fidexio/step_definitions/LoginPage_StepDefinitions.java b/src/test/java/com/fidexio/step_definitions/LoginPage_StepDefinitions.java
+--- a/src/test/java/com/fidexio/step_definitions/LoginPage_StepDefinitions.java	
++++ b/src/test/java/com/fidexio/step_definitions/LoginPage_StepDefinitions.java	
+@@ -9,6 +9,7 @@
+ import io.cucumber.java.en.Then;
+ import io.cucumber.java.en.When;
+ import org.junit.Assert;
++import org.openqa.selenium.JavascriptExecutor;
+ import org.openqa.selenium.Keys;
+ import org.openqa.selenium.support.ui.ExpectedConditions;
+ import org.openqa.selenium.support.ui.WebDriverWait;
+@@ -19,6 +20,9 @@
+ 
+     LoginPage loginPage = new LoginPage();
+     HomePage homePage = new HomePage();
++
++
++  //  #Test Case 1 Scenario:
+     @Given("user is on the login page")
+     public void user_is_on_the_login_page() {
+         Driver.getDriver().get(ConfigurationReader.getProperty("environment"));
+@@ -29,18 +33,21 @@
+         loginPage.userNameInput.sendKeys(string);
+ 
+        }
+-    @When("user enters password {string}")
++    @And("user enters password {string}")
+     public void user_enters_password(String string) {
+         loginPage.passwordInput.sendKeys(string);
+        }
+-    @When("user clicks on the login button")
++    @And("user clicks on the login button")
+     public void user_clicks_on_the_login_button() {
+         loginPage.loginButton.click();
+ 
+-        }
++
++    }
++
++    //#Test Case 2 Scenario:
+     @Then("user should be on the homepage")
+     public void user_should_be_on_the_homepage() {
+-        Driver.getDriver().manage().timeouts().implicitlyWait(0, TimeUnit.SECONDS);
++        Driver.getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+         WebDriverWait wait = new WebDriverWait(Driver.getDriver(), 10);
+         wait.until(ExpectedConditions.titleIs("#Inbox - Odoo"));
+         String expectedTitle ="#Inbox - Odoo";
+@@ -48,19 +55,21 @@
+ 
+     }
+ 
+-
+     @When("user enters invalid email {string}")
+     public void userEntersInvalidEmail(String string) {
+-       loginPage.inputEmail.sendKeys(string);
++      // loginPage.inputEmail.sendKeys(string);
++        loginPage.inputEmail.sendKeys(string);
+         loginPage.loginButton.click();
+     }
+ 
+     @And("user enters invalid password {string}")
+     public void userEntersInvalidPassword(String string) {
+-     loginPage.inputPassword.sendKeys(string);
++    loginPage.inputPassword.sendKeys(string);
++        System.out.println("Enter key is functional");
+      //   loginPage.loginButton.click();
+-        loginPage.loginButton.sendKeys(Keys.ENTER);
++    loginPage.loginButton.sendKeys(Keys.ENTER);
+ 
++
+     }
+ 
+     @Then("user sees {string} message displayed for invalid credentials")
+@@ -72,29 +81,49 @@
+         Assert.assertEquals(expectedMessage,actualMsg);
+ 
+ }
++    //#Test Case 3 Scenario
++    @When("user presses ENTER key on empty email or password box")
++    public void userPressesENTERKeyOnEmptyEmailOrPasswordBox() {
++       // loginPage.passwordInput.sendKeys(Keys.ENTER);
++        loginPage.userNameInput.sendKeys(Keys.ENTER);
++
++    }
+ 
++    @Then("user sees {string} message")
++    public void userSeesMessage(String arg0) {
++        String validationMessage = loginPage.inputEmail.getAttribute("validationMessage");
++        boolean required = Boolean.parseBoolean(loginPage.inputEmail.getAttribute("required"));
++        Assert.assertTrue(arg0, Boolean.parseBoolean(loginPage.inputEmail.getAttribute("required")));
++        Assert.assertEquals(loginPage.inputEmail.getAttribute("validationMessage"), "Please fill out this field", "Please fill out this field");
+ 
+-    @When("user press ENTER key on the login button")
+-    public void user_press_enter_key_on_the_login_button() {
+-       loginPage.loginButton.sendKeys(Keys.ENTER);
+ 
+-          }
+-    @Then("ENTER key is pressable")
+-    public void enter_key_is_pressable() {
+-        System.out.println("homePage.inboxText.getText() = " + homePage.inboxText.getText());
+-        Assert.assertTrue("User cannot log in home page",homePage.inboxText.isDisplayed());
++    }
+ 
+-//        String required = "required";
+-//        String verifiedMessage = "Please fill in this field.";
+-//        boolean requiredUsername = loginPage.userNameInput.getAttribute("required").equals(required);
+-//        boolean requiredPassword = loginPage.passwordInput.getAttribute("required").equals(required);
+-//        boolean validateMsgUsername = loginPage.userNameInput.getAttribute("validationMessage").equals(verifiedMessage);
+-//        boolean validateMsgPassword = loginPage.passwordInput.getAttribute("validationMessage").equals(verifiedMessage);
+-//        Assert.assertTrue(requiredUsername && requiredPassword);
+-//        Assert.assertTrue(validateMsgUsername && validateMsgPassword);
++//#Test Case 4 Scenario:
++    @Then("user should see the password in bullet signs")
++    public void user_should_see_the_password_in_bullet_signs() {
++        // loginPage.inputPassword.sendKeys(string);
++        loginPage.hiddenPassword.isEnabled();
++        System.out.println("bullets " + loginPage.hiddenPassword.isEnabled());
++        Assert.assertEquals("password", loginPage.inputPassword.getAttribute("type"));
+ 
+     }
++
++    @When("user presses ENTER key")
++    public void user_presses_enter_key() {
++        loginPage.loginBtn.sendKeys(Keys.ENTER);
++    }
++
+ }
++
++//#Test Case 5 Scenario:
++
++
++
++
++
++
++
+ 
+ 
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"6c6f132c-cb8c-47e2-a999-d0b0dde90e6a\" name=\"Changes\" comment=\"\" />\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_BRANCH_BY_REPOSITORY\">\r\n      <map>\r\n        <entry key=\"$PROJECT_DIR$\" value=\"master\" />\r\n      </map>\r\n    </option>\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\r\n  </component>\r\n  <component name=\"MarkdownSettingsMigration\">\r\n    <option name=\"stateVersion\" value=\"1\" />\r\n  </component>\r\n  <component name=\"MavenImportPreferences\">\r\n    <option name=\"importingSettings\">\r\n      <MavenImportingSettings>\r\n        <option name=\"workspaceImportEnabled\" value=\"true\" />\r\n      </MavenImportingSettings>\r\n    </option>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"2Mgm6STbo2UNXDRtA15IO6YYJPW\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"autoscrollToSource\" value=\"true\" />\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">{\r\n  &quot;keyToString&quot;: {\r\n    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,\r\n    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,\r\n    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,\r\n    &quot;ToolWindowRun.ShowToolbar&quot;: &quot;false&quot;,\r\n    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,\r\n    &quot;last_opened_file_path&quot;: &quot;C:/Users/m_yas/IdeaProjects/my_first_project/src&quot;,\r\n    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,\r\n    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,\r\n    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,\r\n    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.general&quot;,\r\n    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;\r\n  },\r\n  &quot;keyToStringList&quot;: {\r\n    &quot;GitStage.ChangesTree.GroupingKeys&quot;: [\r\n      &quot;directory&quot;,\r\n      &quot;module&quot;,\r\n      &quot;repository&quot;\r\n    ]\r\n  }\r\n}</component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"CopyFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\m_yas\\IdeaProjects\\my_first_project\\src\" />\r\n      <recent name=\"C:\\Users\\m_yas\\IdeaProjects\\my_first_project\\src\\test\" />\r\n      <recent name=\"C:\\Users\\m_yas\\IdeaProjects\\my_first_project\\src\\test\\java\" />\r\n    </key>\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\m_yas\\IdeaProjects\\my_first_project\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\" selected=\"JUnit.CukesRunner\">\r\n    <configuration name=\"Feature: fidexioLogin\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature\" />\r\n      <option name=\"GLUE\" value=\"com.fidexio.step_definitions\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"my_first_project\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Feature: fidexioLogin\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Feature: googleSearch\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/googleSearch.feature\" />\r\n      <option name=\"GLUE\" value=\"com.cydeo.step_definitions\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"my_first_project\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Feature: googleSearch\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: Enter invalid credentials\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature\" />\r\n      <option name=\"GLUE\" value=\"com.fidexio.step_definitions\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"my_first_project\" />\r\n      <option name=\"NAME_FILTER\" value=\"^Enter invalid credentials$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Enter invalid credentials$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: Enter invalid credentials\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: Hover over credentials\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature\" />\r\n      <option name=\"GLUE\" value=\"com.fidexio.step_definitions\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"my_first_project\" />\r\n      <option name=\"NAME_FILTER\" value=\"^Hover over credentials$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Hover over credentials$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: Hover over credentials\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: Login as admin\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/login.feature\" />\r\n      <option name=\"GLUE\" value=\"com.cydeo.step_definitions\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"my_first_project\" />\r\n      <option name=\"NAME_FILTER\" value=\"^Login as admin$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Login as admin$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: Login as admin\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: Login as student\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/login.feature\" />\r\n      <option name=\"GLUE\" value=\"com.cydeo.step_definitions\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"my_first_project\" />\r\n      <option name=\"NAME_FILTER\" value=\"^Login as student$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Login as student$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: Login as student\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: Login with valid credentials\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature\" />\r\n      <option name=\"GLUE\" value=\"com.fidexio.step_definitions\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"my_first_project\" />\r\n      <option name=\"NAME_FILTER\" value=\"^Login with valid credentials$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Login with valid credentials$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: Login with valid credentials\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: Positive login test\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature\" />\r\n      <option name=\"GLUE\" value=\"com.cydeo.step_definitions\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"my_first_project\" />\r\n      <option name=\"NAME_FILTER\" value=\"^Positive login test$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Positive login test$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: Positive login test\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"Scenario: Search functionality result title verification\" type=\"CucumberJavaRunConfigurationType\" factoryName=\"Cucumber java\" nameIsGenerated=\"true\">\r\n      <option name=\"CUCUMBER_CORE_VERSION\" value=\"5\" />\r\n      <option name=\"FILE_PATH\" value=\"$PROJECT_DIR$/src/test/resources/features/googleSearch.feature\" />\r\n      <option name=\"GLUE\" value=\"com.cydeo.step_definitions\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"io.cucumber.core.cli.Main\" />\r\n      <module name=\"my_first_project\" />\r\n      <option name=\"NAME_FILTER\" value=\"^Search functionality result title verification$\" />\r\n      <option name=\"PROGRAM_PARAMETERS\" value=\" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Search functionality result title verification$&quot;\" />\r\n      <option name=\"SUGGESTED_NAME\" value=\"Scenario: Search functionality result title verification\" />\r\n      <option name=\"WORKING_DIRECTORY\" value=\"$MODULE_WORKING_DIR$\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"io.cucumber.core.cli.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"CukesRunner\" type=\"JUnit\" factoryName=\"JUnit\" nameIsGenerated=\"true\">\r\n      <module name=\"my_first_project\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.fidexio.runners.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.cydeo.runners\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.fidexio.runners.CukesRunner\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <configuration name=\"FailedTestRunner\" type=\"JUnit\" factoryName=\"JUnit\" nameIsGenerated=\"true\">\r\n      <module name=\"my_first_project\" />\r\n      <extension name=\"coverage\">\r\n        <pattern>\r\n          <option name=\"PATTERN\" value=\"com.fidexio.runners.*\" />\r\n          <option name=\"ENABLED\" value=\"true\" />\r\n        </pattern>\r\n      </extension>\r\n      <option name=\"PACKAGE_NAME\" value=\"com.fidexio.runners\" />\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"com.fidexio.runners.FailedTestRunner\" />\r\n      <option name=\"TEST_OBJECT\" value=\"class\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Cucumber Java.Scenario: Enter invalid credentials\" />\r\n        <item itemvalue=\"Cucumber Java.Feature: fidexioLogin\" />\r\n        <item itemvalue=\"Cucumber Java.Scenario: Enter invalid credentials\" />\r\n        <item itemvalue=\"Cucumber Java.Feature: fidexioLogin\" />\r\n        <item itemvalue=\"Cucumber Java.Feature: fidexioLogin\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SeleniumInternalSettingsState\">\r\n    <option name=\"lastFrameworkName\" value=\"Selenium\" />\r\n    <option name=\"lastLanguageId\" value=\"JAVA\" />\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"6c6f132c-cb8c-47e2-a999-d0b0dde90e6a\" name=\"Changes\" comment=\"\" />\r\n      <created>1678197426579</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1678197426579</updated>\r\n      <workItem from=\"1678197427923\" duration=\"27568000\" />\r\n      <workItem from=\"1678265485671\" duration=\"25535000\" />\r\n      <workItem from=\"1678347527995\" duration=\"7166000\" />\r\n      <workItem from=\"1678357252988\" duration=\"8105000\" />\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"login functionality\">\r\n      <created>1678287450262</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1678287450262</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"login functionality\">\r\n      <created>1678287456259</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1678287456259</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"3\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"TypeScriptGeneratedFilesManager\">\r\n    <option name=\"version\" value=\"3\" />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State>\r\n              <option name=\"FILTERS\">\r\n                <map>\r\n                  <entry key=\"branch\">\r\n                    <value>\r\n                      <list>\r\n                        <option value=\"murat\" />\r\n                      </list>\r\n                    </value>\r\n                  </entry>\r\n                </map>\r\n              </option>\r\n            </State>\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"login functionality\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"login functionality\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	
++++ b/.idea/workspace.xml	
+@@ -25,6 +25,19 @@
+     </option>
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
++  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
++  "lastFilter": {
++    "state": "OPEN"
++  }
++}]]></component>
++  <component name="GithubPullRequestsUISettings">
++    <option name="selectedUrlAndAccountId">
++      <UrlAndAccount>
++        <option name="accountId" value="daed6f6d-e4cc-4fff-97f3-cc4fdd9b4d5e" />
++        <option name="url" value="https://github.com/MuratYasul/my_first_project.git" />
++      </UrlAndAccount>
++    </option>
++  </component>
+   <component name="MarkdownSettingsMigration">
+     <option name="stateVersion" value="1" />
+   </component>
+@@ -77,14 +90,14 @@
+     </key>
+   </component>
+   <component name="RunManager" selected="JUnit.CukesRunner">
+-    <configuration name="Feature: fidexioLogin" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
++    <configuration name="Feature: googleSearch" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" nameIsGenerated="true">
+       <option name="CUCUMBER_CORE_VERSION" value="5" />
+-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature" />
+-      <option name="GLUE" value="com.fidexio.step_definitions" />
++      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/googleSearch.feature" />
++      <option name="GLUE" value="com.cydeo.step_definitions" />
+       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+       <module name="my_first_project" />
+       <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
+-      <option name="SUGGESTED_NAME" value="Feature: fidexioLogin" />
++      <option name="SUGGESTED_NAME" value="Feature: googleSearch" />
+       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+       <extension name="coverage">
+         <pattern>
+@@ -96,14 +109,15 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
+-    <configuration name="Feature: googleSearch" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" nameIsGenerated="true">
++    <configuration name="Scenario: Enter Key Functionality" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
+       <option name="CUCUMBER_CORE_VERSION" value="5" />
+-      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/googleSearch.feature" />
+-      <option name="GLUE" value="com.cydeo.step_definitions" />
++      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature" />
++      <option name="GLUE" value="com.fidexio.step_definitions" />
+       <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
+       <module name="my_first_project" />
+-      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter" />
+-      <option name="SUGGESTED_NAME" value="Feature: googleSearch" />
++      <option name="NAME_FILTER" value="^Enter Key Functionality$" />
++      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Enter Key Functionality$&quot;" />
++      <option name="SUGGESTED_NAME" value="Scenario: Enter Key Functionality" />
+       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+       <extension name="coverage">
+         <pattern>
+@@ -124,6 +138,46 @@
+       <option name="NAME_FILTER" value="^Enter invalid credentials$" />
+       <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Enter invalid credentials$&quot;" />
+       <option name="SUGGESTED_NAME" value="Scenario: Enter invalid credentials" />
++      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="io.cucumber.core.cli.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="Scenario: Enter key functionality" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
++      <option name="CUCUMBER_CORE_VERSION" value="5" />
++      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature" />
++      <option name="GLUE" value="com.fidexio.step_definitions" />
++      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
++      <module name="my_first_project" />
++      <option name="NAME_FILTER" value="^Enter key functionality$" />
++      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Enter key functionality$&quot;" />
++      <option name="SUGGESTED_NAME" value="Scenario: Enter key functionality" />
++      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="io.cucumber.core.cli.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
++    <configuration name="Scenario: Fill out this field message" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
++      <option name="CUCUMBER_CORE_VERSION" value="5" />
++      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature" />
++      <option name="GLUE" value="com.fidexio.step_definitions" />
++      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
++      <module name="my_first_project" />
++      <option name="NAME_FILTER" value="^Fill out this field message$" />
++      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Fill out this field message$&quot;" />
++      <option name="SUGGESTED_NAME" value="Scenario: Fill out this field message" />
+       <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
+       <extension name="coverage">
+         <pattern>
+@@ -215,6 +269,26 @@
+         <option name="Make" enabled="true" />
+       </method>
+     </configuration>
++    <configuration name="Scenario: Password in bullet signs by default" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
++      <option name="CUCUMBER_CORE_VERSION" value="5" />
++      <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature" />
++      <option name="GLUE" value="com.fidexio.step_definitions" />
++      <option name="MAIN_CLASS_NAME" value="io.cucumber.core.cli.Main" />
++      <module name="my_first_project" />
++      <option name="NAME_FILTER" value="^Password in bullet signs by default$" />
++      <option name="PROGRAM_PARAMETERS" value=" --plugin org.jetbrains.plugins.cucumber.java.run.CucumberJvm5SMFormatter --name &quot;^Password in bullet signs by default$&quot;" />
++      <option name="SUGGESTED_NAME" value="Scenario: Password in bullet signs by default" />
++      <option name="WORKING_DIRECTORY" value="$MODULE_WORKING_DIR$" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="io.cucumber.core.cli.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++      <method v="2">
++        <option name="Make" enabled="true" />
++      </method>
++    </configuration>
+     <configuration name="Scenario: Positive login test" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" nameIsGenerated="true">
+       <option name="CUCUMBER_CORE_VERSION" value="5" />
+       <option name="FILE_PATH" value="$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature" />
+@@ -287,11 +361,11 @@
+     </configuration>
+     <recent_temporary>
+       <list>
+-        <item itemvalue="Cucumber Java.Scenario: Enter invalid credentials" />
+-        <item itemvalue="Cucumber Java.Feature: fidexioLogin" />
++        <item itemvalue="Cucumber Java.Scenario: Enter Key Functionality" />
+         <item itemvalue="Cucumber Java.Scenario: Enter invalid credentials" />
+-        <item itemvalue="Cucumber Java.Feature: fidexioLogin" />
+-        <item itemvalue="Cucumber Java.Feature: fidexioLogin" />
++        <item itemvalue="Cucumber Java.Scenario: Enter key functionality" />
++        <item itemvalue="Cucumber Java.Scenario: Password in bullet signs by default" />
++        <item itemvalue="Cucumber Java.Scenario: Fill out this field message" />
+       </list>
+     </recent_temporary>
+   </component>
+@@ -310,7 +384,9 @@
+       <workItem from="1678197427923" duration="27568000" />
+       <workItem from="1678265485671" duration="25535000" />
+       <workItem from="1678347527995" duration="7166000" />
+-      <workItem from="1678357252988" duration="8105000" />
++      <workItem from="1678357252988" duration="9630000" />
++      <workItem from="1678429058863" duration="18813000" />
++      <workItem from="1678463099528" duration="20099000" />
+     </task>
+     <task id="LOCAL-00001" summary="login functionality">
+       <created>1678287450262</created>
+@@ -326,7 +402,14 @@
+       <option name="project" value="LOCAL" />
+       <updated>1678287456259</updated>
+     </task>
+-    <option name="localTasksCounter" value="3" />
++    <task id="LOCAL-00003" summary="login functionality">
++      <created>1678373977567</created>
++      <option name="number" value="00003" />
++      <option name="presentableId" value="LOCAL-00003" />
++      <option name="project" value="LOCAL" />
++      <updated>1678373977567</updated>
++    </task>
++    <option name="localTasksCounter" value="4" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+Index: src/test/java/com/fidexio/step_definitions/Hooks.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fidexio.step_definitions;\r\n\r\n/*\r\nIn the class we will be able to pass pre-& post-conditions to each scenario and each scenario step.\r\n */\r\n\r\nimport com.fidexio.utilities.BrowsersUtils;\r\nimport com.fidexio.utilities.Driver;\r\nimport io.cucumber.java.After;\r\nimport io.cucumber.java.AfterStep;\r\nimport io.cucumber.java.BeforeStep;\r\nimport io.cucumber.java.Scenario;\r\nimport org.openqa.selenium.OutputType;\r\nimport org.openqa.selenium.TakesScreenshot;\r\n\r\npublic class Hooks {\r\n    //import from io.cucumber.java. not from junit.framework.\r\n  //  @Before (order = 1)\r\n    public void setupScenario(){\r\n   //     System.out.println(\"====Setting up browser using cucumber @Before tag====\");\r\n    }\r\n  //  @Before (value = \"@login\", order =2)\r\n    public void setupScenarioForLogins(){\r\n//    System.out.println(\"this will only apply to scenario with @login tag\");\r\n    }\r\n  //  @Before (value = \"@db\", order = 0)\r\n    public void setupForDatabaseScenarios(){\r\n   //  System.out.println(\"this will only apply to scenario with @login tag\");\r\n    }\r\n    @After\r\n    public void teardownScenario(Scenario scenario){//in order to take screenshot we are stating here writing into the bracket scenario.\r\n\r\n        //in order to get screenshot we are down-casting using interface TakeScreenshot() method.\r\n        if (scenario.isFailed()) {\r\n        byte [] screenshot = ((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);\r\n       scenario.attach(screenshot,\"image/png\", scenario.getName());\r\n\r\n        }\r\n\r\n    byte [] screenshot = ((TakesScreenshot)Driver.getDriver()).getScreenshotAs(OutputType.BYTES);\r\n       scenario.attach(screenshot,\"image/png\", scenario.getName());\r\n\r\n//    System.out.println(\"====Closing browser using cucumber @After tag====\");\r\n//        System.out.println(\"====Scenario ended/take screenshot if failed====\");\r\n//\r\n\r\n       BrowsersUtils.sleep(0);\r\n       Driver.closeDriver();\r\n    }\r\n  @BeforeStep\r\n    public void setupStep(){\r\n    //  System.out.println(\"====> Applying setup using @BeforeStep===\");\r\n    }\r\n    @AfterStep\r\n   public void afterStep(){\r\n  //     System.out.println(\"====> Applying tearDown using @afterStep\");\r\n}\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/fidexio/step_definitions/Hooks.java b/src/test/java/com/fidexio/step_definitions/Hooks.java
+--- a/src/test/java/com/fidexio/step_definitions/Hooks.java	
++++ b/src/test/java/com/fidexio/step_definitions/Hooks.java	
+@@ -44,8 +44,8 @@
+ //        System.out.println("====Scenario ended/take screenshot if failed====");
+ //
+ 
+-       BrowsersUtils.sleep(0);
+-       Driver.closeDriver();
++       BrowsersUtils.sleep(3);
++      Driver.closeDriver();
+     }
+   @BeforeStep
+     public void setupStep(){
+Index: src/test/java/com/fidexio/pages/HomePage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fidexio.pages;\r\n\r\nimport com.fidexio.utilities.Driver;\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.support.FindBy;\r\nimport org.openqa.selenium.support.PageFactory;\r\n\r\npublic class HomePage {\r\n    public HomePage() {\r\n        PageFactory.initElements(Driver.getDriver(), this);\r\n\r\n\r\n    }\r\n@FindBy(xpath = \"//div/ol/li[@class='active']\")\r\n    public WebElement inboxText;\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/fidexio/pages/HomePage.java b/src/test/java/com/fidexio/pages/HomePage.java
+--- a/src/test/java/com/fidexio/pages/HomePage.java	
++++ b/src/test/java/com/fidexio/pages/HomePage.java	
+@@ -11,8 +11,11 @@
+ 
+ 
+     }
+-@FindBy(xpath = "//div/ol/li[@class='active']")
+-    public WebElement inboxText;
++    @FindBy(className = "oe_topbar_name")
++    public WebElement userNameText;
++
++    @FindBy(id ="login")
++    public WebElement inputEmail;
+ 
+ 
+ }
+Index: src/test/java/com/fidexio/step_definitions/US_Steps
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>Login Fonctionality\r\n1-Users can log in with valid credentials (We have 5 types of users but will test only 2 user: PosManager, SalesManager)\r\n2-  \"Wrong login/password\" should be displayed for invalid\r\n    (valid username-invalid password and invalid username-valid password) credentials\r\n3- \"Please fill out this field\" message should be displayed if the password or username is empty\r\n4-User land on the ‘reset password’ page after clicking on the \"Reset password\" link\r\n5-User should see the password in bullet signs by default\r\n6- Verify if the ‘Enter’ key of the keyboard is working correctly on the login page.\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/fidexio/step_definitions/US_Steps b/src/test/java/com/fidexio/step_definitions/US_Steps
+--- a/src/test/java/com/fidexio/step_definitions/US_Steps	
++++ b/src/test/java/com/fidexio/step_definitions/US_Steps	
+@@ -4,7 +4,6 @@
+     (valid username-invalid password and invalid username-valid password) credentials
+ 3- "Please fill out this field" message should be displayed if the password or username is empty
+ 4-User land on the ‘reset password’ page after clicking on the "Reset password" link
+-5-User should see the password in bullet signs by default
++5-User should see the password in bullet signs by default//we can take screenshot to prove the password is in bullet signs
+ 6- Verify if the ‘Enter’ key of the keyboard is working correctly on the login page.
+ 
+-
+Index: src/test/java/com/fidexio/runners/CukesRunner.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fidexio.runners;\r\n\r\nimport io.cucumber.junit.Cucumber;\r\nimport io.cucumber.junit.CucumberOptions;\r\nimport org.junit.runner.RunWith;\r\n\r\n@RunWith(Cucumber.class)\r\n@CucumberOptions(\r\n        plugin = {\r\n                \"json:target/cucumber.json\",\r\n                \"html:target/cucumber-report.html\",\r\n                \"rerun:target/rerun.txt\",\r\n                \"me.jvt.cucumber.report.PrettyReports:target/cucumber\"\r\n        },\r\n        features = \"src/test/resources/features\",\r\n        glue = \"com/fidexio/step_definitions\",\r\n        dryRun = false,\r\n        tags = \"@wip\"\r\n\r\n\r\n)\r\npublic class CukesRunner {\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/fidexio/runners/CukesRunner.java b/src/test/java/com/fidexio/runners/CukesRunner.java
+--- a/src/test/java/com/fidexio/runners/CukesRunner.java	
++++ b/src/test/java/com/fidexio/runners/CukesRunner.java	
+@@ -15,7 +15,7 @@
+         features = "src/test/resources/features",
+         glue = "com/fidexio/step_definitions",
+         dryRun = false,
+-        tags = "@wip"
++        tags = ""
+ 
+ 
+ )
+Index: src/test/resources/features/fidexioLogin.feature
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>#execution\r\n\r\nFeature: Login functionality\r\n  Background: user is on the login page\r\n    Given user is on the login page\r\n\r\n  #Test Case 1 Scenario:\r\n  Scenario Outline: Login with valid credentials\r\n    When user enters valid \"<email>\"\r\n    And user enters password \"<password>\"\r\n    And user clicks on the login button\r\n    Then user should be on the homepage\r\n\r\n    Examples: Email and Password\r\n      | email                   | password     |\r\n      | salesmanager44@info.com | salesmanager |\r\n      | posmanager33@info.com   | posmanager   |\r\n\r\n\r\n#Test Case 2 Scenario:\r\n  @wip\r\n  Scenario Outline: Enter invalid credentials\r\n    When user enters invalid email \"<email>\"\r\n    And user enters invalid password \"<password>\"\r\n    And user clicks on the login button\r\n    Then user sees \"Wrong login/password\" message displayed for invalid credentials\r\n\r\n    Examples: Email and Password\r\n      | email                    | password     |\r\n      | salesmanager440@info.com | salesmanager |\r\n      | salesmanager44@info.com  | salesmanage  |\r\n      | posmasmanager44@info.com | posmanager   |\r\n      | posmanager33@info.com    | posmanage    |\r\n\r\n    #Test Case 3 Scenario\r\n  Scenario Outline: Enter key functionality\r\n    When user enters valid \"<email>\"\r\n    And user enters password \"<password>\"\r\n    And user press ENTER key on the login button\r\n    Then ENTER key is pressable\r\n\r\n    Examples: Email and Password\r\n      | email                   | password     |\r\n      | salesmanager44@info.com | salesmanager |\r\n      | posmanager33@info.com   | posmanager   |\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/resources/features/fidexioLogin.feature b/src/test/resources/features/fidexioLogin.feature
+--- a/src/test/resources/features/fidexioLogin.feature	
++++ b/src/test/resources/features/fidexioLogin.feature	
+@@ -18,7 +18,7 @@
+ 
+ 
+ #Test Case 2 Scenario:
+-  @wip
++
+   Scenario Outline: Enter invalid credentials
+     When user enters invalid email "<email>"
+     And user enters invalid password "<password>"
+@@ -32,14 +32,45 @@
+       | posmasmanager44@info.com | posmanager   |
+       | posmanager33@info.com    | posmanage    |
+ 
+-    #Test Case 3 Scenario
+-  Scenario Outline: Enter key functionality
++#Test Case 3 Scenario
++  Scenario: Fill out this field message
++    When user presses ENTER key on empty email or password box
++    Then user sees "Please fill out this field" message
++
++
++      #Test Case 4 Scenario:
++  Scenario Outline: Password in bullet signs by default
+     When user enters valid "<email>"
+     And user enters password "<password>"
+-    And user press ENTER key on the login button
+-    Then ENTER key is pressable
++    Then user should see the password in bullet signs
+ 
+     Examples: Email and Password
+       | email                   | password     |
+       | salesmanager44@info.com | salesmanager |
+-      | posmanager33@info.com   | posmanager   |
++
++      #Test Case 5 Scenario
++  @wip
++  Scenario Outline: Enter Key Functionality
++    When user enters valid "<email>"
++    And user enters password "<password>"
++    And user presses ENTER key
++    Then user should be on the homepage
++    Examples: Email and Password
++      | email                   | password     |
++      | salesmanager44@info.com | salesmanager |
++
++
++
++
++#  Scenario Outline: Enter key functionality
++#    When user enters valid "<email>"
++#    And user enters password "<password>"
++#    And user press ENTER key on the login button
++#    Then user should be on the homepage
++#
++#    Examples: Email and Password
++#      | email                   | password     |
++#      | salesmanager44@info.com | salesmanager |
++#      | posmanager33@info.com   | posmanager   |
++
++

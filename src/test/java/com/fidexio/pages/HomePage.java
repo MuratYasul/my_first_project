@@ -11,7 +11,7 @@ public class HomePage {
 
 
     }
-@FindBy(xpath = "//div/ol/li[@class='active']")
+@FindBy(xpath = "//li[.='#Inbox']")
     public WebElement inboxText;
 
 

@@ -1,11 +1,12 @@
 #execution
-
+@FIDEX10-334 @wip
 Feature: Login functionality
   Background: user is on the login page
     Given user is on the login page
 
   #Test Case 1 Scenario:
-  Scenario Outline: Login with valid credentials
+  @FIDEX10-414 @wip
+  Scenario Outline: User can login with valid credentials
     When user enters valid "<email>"
     And user enters password "<password>"
     And user clicks on the login button
@@ -18,8 +19,8 @@ Feature: Login functionality
 
 
 #Test Case 2 Scenario:
-  @wip
-  Scenario Outline: Enter invalid credentials
+@FIDEX10-415 @wip
+  Scenario Outline: User cannot login with invalid credentials
     When user enters invalid email "<email>"
     And user enters invalid password "<password>"
     And user clicks on the login button
@@ -28,12 +29,29 @@ Feature: Login functionality
     Examples: Email and Password
       | email                    | password     |
       | salesmanager440@info.com | salesmanager |
-      | salesmanager44@info.com  | salesmanage  |
-      | posmasmanager44@info.com | posmanager   |
-      | posmanager33@info.com    | posmanage    |
+      | salesmanager44@info.com  | sales        |
+@FIDEX10-416 @wip
+#Test Case 3 Scenario
+  Scenario Outline: User should see validation message when using empty credentials
+    When user enters valid "<email>" in username box
+    And user enters valid "<password>" in password box
+    And user clicks on the login button
+    Then user should see "Please fill out this field." validation message
+    Examples:
+      | email                 | password     |
+      |                       |              |
+      | posmanager33@info.com |              |
+      |                       | salesmanager |
 
-    #Test Case 3 Scenario
-  Scenario Outline: Enter key functionality
+@FIDEX10-417 @wip
+    #Test Case 4
+  Scenario: User should see the password in bullet signs by default
+    When user enters password "<password>"
+    Then user should see bullet signs
+
+@FIDEX10-419 @wip
+    #Test Case 5 Scenario
+  Scenario Outline: Verify "Enter" key of the keyboard is functional
     When user enters valid "<email>"
     And user enters password "<password>"
     And user press ENTER key on the login button

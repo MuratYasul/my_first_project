@@ -1,0 +1,19 @@
+Index: src/test/java/com/fidexio/pages/LoginPage.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.fidexio.pages;\r\n\r\nimport com.fidexio.utilities.BrowsersUtils;\r\nimport com.fidexio.utilities.Driver;\r\nimport org.openqa.selenium.By;\r\nimport org.openqa.selenium.WebElement;\r\nimport org.openqa.selenium.interactions.Actions;\r\nimport org.openqa.selenium.support.FindBy;\r\nimport org.openqa.selenium.support.PageFactory;\r\n\r\n\r\npublic class LoginPage {\r\n    public LoginPage() {\r\n        PageFactory.initElements(Driver.getDriver(), this);\r\n    }\r\n    @FindBy(id =\"login\")\r\n    public WebElement userNameInput;\r\n\r\n    @FindBy(id =\"password\")\r\n    public WebElement passwordInput;\r\n\r\n    @FindBy(xpath = \"//button[@type='submit']\")\r\n    public WebElement loginButton;\r\n\r\n    @FindBy(id =\"login\")\r\n    public WebElement inputEmail;\r\n\r\n    @FindBy(id =\"password\")\r\n    public WebElement inputPassword;\r\n\r\n    @FindBy(xpath = \"//button[@type='submit']\")\r\n    public WebElement loginBtn;\r\n    @FindBy(xpath =\"//p[contains(text(),'Wrong login/password')]\")\r\n    public WebElement wrongCredentials;\r\n\r\n\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/test/java/com/fidexio/pages/LoginPage.java b/src/test/java/com/fidexio/pages/LoginPage.java
+--- a/src/test/java/com/fidexio/pages/LoginPage.java	
++++ b/src/test/java/com/fidexio/pages/LoginPage.java	
+@@ -33,6 +33,7 @@
+     @FindBy(xpath ="//p[contains(text(),'Wrong login/password')]")
+     public WebElement wrongCredentials;
+ 
+-
++    @FindBy(xpath = "//input[@name='csrf_token']")
++    public WebElement hiddenPassword;
+ 
+ }
