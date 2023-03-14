@@ -44,7 +44,7 @@ public class Hooks {
 //        System.out.println("====Scenario ended/take screenshot if failed====");
 //
 
-      BrowsersUtils.sleep(1);
+      BrowsersUtils.sleep(3);
       Driver.closeDriver();
     }
   @BeforeStep

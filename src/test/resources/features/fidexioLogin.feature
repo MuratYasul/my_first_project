@@ -1,5 +1,6 @@
 #execution
-@FIDEX10-334 @wip
+@regression
+@FIDEX10-334 @wip @smoke
 Feature: Login functionality
   Background: user is on the login page
     Given user is on the login page
@@ -19,7 +20,7 @@ Feature: Login functionality
 
 
 #Test Case 2 Scenario:
-@FIDEX10-415 @wip
+@FIDEX10-415 @wip @test1
   Scenario Outline: User cannot login with invalid credentials
     When user enters invalid email "<email>"
     And user enters invalid password "<password>"

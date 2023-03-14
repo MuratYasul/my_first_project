@@ -8,3 +8,32 @@ Login Fonctionality
 6- Verify if the ‘Enter’ key of the keyboard is working correctly on the login page.
 
 
+
+////
+////    //Test Case-1
+////    @Given("user is on the login page")
+////    public void user_is_on_the_login_page() {
+////        Driver.getDriver().get(ConfigurationReader.getProperty("environment"));
+////
+////    }
+////    @When("user enters valid {string}")
+////    public void user_enters_valid(String email) {
+////        //   loginPage.userNameInput.sendKeys(string);
+////        loginPage.inputEmail.sendKeys(email);
+////        actualEmail = email;
+////
+////    }
+//    @When("user enters password {string}")
+//    public void user_enters_password(String password) {
+//        // loginPage.passwordInput.sendKeys(string);
+//        loginPage.inputPassword.sendKeys(password);
+//        actualPassword = password;
+//    }
+//    @When("user clicks on the login button")
+//    public void user_clicks_on_the_login_button() {
+//        loginPage.loginButton.click();
+//
+//    }
+
+
+

@@ -14,6 +14,10 @@ public class LogoutPage {
     @FindBy(xpath = "//a[.='Best solution for startups']")
     public WebElement loginPageTxt;
 
+    @FindBy(xpath = "//h4[.='Odoo Session Expired']")
+    public WebElement sessionExpMsg;
+
+
 
 
 

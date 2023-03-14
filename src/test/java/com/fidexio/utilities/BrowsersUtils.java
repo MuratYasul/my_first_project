@@ -73,7 +73,7 @@ public class BrowsersUtils {
         List<String> actualOptionsAsString = new ArrayList<String>();
 
         for (WebElement each: actualOptionsAsWebElement) {
-            actualOptionsAsString.add(each.getText());//this is getting the list of the webelement options
+            actualOptionsAsString.add(each.getText());//this is getting the list of the element options
         }
         return actualOptionsAsString;
 
@@ -85,6 +85,7 @@ public class BrowsersUtils {
                 each.click();
             }
         }
+
 //         public static void switchToWindow(String targetTitle){
 //             String origin = Driver.getDriver().getWindowHandle();
 //            for (String handle: Driver.getDriver().getWindowHandles()){
@@ -96,7 +97,7 @@ public class BrowsersUtils {
 //
 //            }
 //            Driver.getDriver().switchTo().window(origin);
-        }
+       }
 }
 
 

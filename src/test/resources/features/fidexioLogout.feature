@@ -1,8 +1,8 @@
+@logout
 Feature: Logout functionality
   Background: user in on the login page
     Given user is on the login page
 
-    @smoke
   Scenario Outline: User can log out on the login page
     When user enters valid "<email>"
     And user enters password "<password>"
