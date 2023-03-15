@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="6c6f132c-cb8c-47e2-a999-d0b0dde90e6a" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_11_2023_12_41_AM.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_11_2023_12_41_AM.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_11_2023_1_11_AM.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_11_2023_1_11_AM.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_11_2023_1_11_AM1.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Checkout_at_3_11_2023_1_11_AM1.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_3_11_2023_1_15_AM.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Merge_at_3_11_2023_1_15_AM.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/fidexio/pages/LogoutPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/fidexio/pages/LogoutPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/fidexio/runners/CukesRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/fidexio/runners/CukesRunner.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/fidexio/step_definitions/Hooks.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/fidexio/step_definitions/Hooks.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/fidexio/step_definitions/Logout_StepDefinitions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/fidexio/step_definitions/Logout_StepDefinitions.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/fidexio/step_definitions/US_Steps" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/fidexio/step_definitions/US_Steps" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/fidexio/utilities/BrowsersUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/fidexio/utilities/BrowsersUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/fidexio/utilities/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/fidexio/utilities/Driver.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/fidexioLogin.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/resources/features/fidexioLogout.feature" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/resources/features/fidexioLogout.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -392,6 +379,7 @@
       <workItem from="1678607108615" duration="16028000" />
       <workItem from="1678655099908" duration="1008000" />
       <workItem from="1678701150469" duration="333000" />
+      <workItem from="1678860747674" duration="302000" />
     </task>
     <task id="LOCAL-00001" summary="login functionality">
       <created>1678287450262</created>
@@ -421,7 +409,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678552155625</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="logout function test wip">
+      <created>1678795149019</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1678795149019</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
